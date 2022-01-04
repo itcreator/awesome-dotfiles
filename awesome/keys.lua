@@ -135,6 +135,12 @@ keys.globalkeys = gears.table.join(
    -- SPAWN APPLICATION KEY BINDINGS
    -- =========================================
 
+   awful.key({modkey}, "l",
+       function()
+           awful.spawn(apps.lock)
+       end,
+       {description = "lock screen", group = "launcher"}
+   ),
    -- Spawn terminal
    awful.key({modkey}, "Return",
       function()
@@ -143,7 +149,7 @@ keys.globalkeys = gears.table.join(
       {description = "open a terminal", group = "launcher"}
    ),
    -- launch rofi
-   awful.key({modkey}, "d",
+   awful.key({modkey}, "`",
       function()
          awful.spawn(apps.launcher)
       end,

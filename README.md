@@ -166,7 +166,7 @@ If you are new to awesomewm, note that tag refers to workspace, and client refer
 
 ### Keyboard ###
 + `mod + enter`: Spawn terminal
-+ `mod + d`: Spawn rofi (an application menu)
++ `mod + `` `:  Spawn rofi (an application menu)
 + `mod + f`: Make client fullscreen
 + `mod + m`: Maximize client
 + `mod + n`: Minimize client
@@ -178,6 +178,7 @@ If you are new to awesomewm, note that tag refers to workspace, and client refer
 + `mod + Shift + [up / down / left / right / h / j / k / l]`: Move client by direction
 + `mod + Control + [up / down / left / right / h / j / k / l]`: Resize client by direction
 + `mod + Escape`: Show exit screen
++ `mod + l`: Lock screen
 
 ### Mouse ###
 + `mod + drag with left click`: Move client

@@ -31,13 +31,12 @@ mirage.initialize = function()
    require("components.mirage.titlebar")
 
    -- Import panels
-   local left_panel = require("components.mirage.left-panel")
    local top_panel = require("components.mirage.top-panel")
 
    local icon_dir = gears.filesystem.get_configuration_dir() .. "/icons/tags/mirage/"
    -- Set up each screen (add tags & panels)
    awful.screen.connect_for_each_screen(function(s)
-      for i = 1, 7, 1
+      for i = 1, 9, 1
       do
          awful.tag.add(i, {
             icon = icon_dir .. i .. ".png",
@@ -46,11 +45,6 @@ mirage.initialize = function()
             screen = s,
             selected = i == 1
          })
-      end
-
-      -- Only add the left panel on the primary screen
-      if s.index == 1 then
-         left_panel.create(s)
       end
 
       -- Add the top panel to every screen

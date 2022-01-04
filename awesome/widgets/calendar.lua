@@ -28,7 +28,7 @@ local calendar = {}
 calendar.create = function(screen)
    -- Clock / Calendar 12h format
    -- Get Time/Date format using `man strftime`
-   local clock_widget = wibox.widget.textclock("<span font='" .. beautiful.title_font .."'>%l:%M %p</span>", 1)
+   local clock_widget = wibox.widget.textclock("<span font='" .. beautiful.title_font .."'>%Y-%m-%d   %H:%M:%S</span>", 1)
 
    -- Alternative to naughty.notify - tooltip. You can compare both and choose the preferred one
    awful.tooltip({
@@ -48,9 +48,9 @@ calendar.create = function(screen)
    end
 
    -- Calendar Widget
-   local month_calendar = awful.widget.calendar_popup.month({
+   local month_calendar = awful.widget.calendar_popup.year({
       screen = screen,
-      start_sunday = true,
+      start_sunday = false,
       spacing = 10,
       font = beautiful.title_font,
       long_weekdays = true,

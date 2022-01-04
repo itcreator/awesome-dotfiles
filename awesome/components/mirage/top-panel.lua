@@ -14,8 +14,12 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local gears = require("gears")
+local tag_list = require("widgets.tag-list")
 
 local dpi = beautiful.xresources.apply_dpi
+
+-- import widgets
+local task_list = require("widgets.task-list")
 
 -- define module table
 local top_panel = {}
@@ -27,7 +31,6 @@ local top_panel = {}
 
 
 top_panel.create = function(s)
-
    local panel = wibox({
       screen = s,
       position = "top",
@@ -35,7 +38,7 @@ top_panel.create = function(s)
       visible = true,
       height = beautiful.top_panel_height,
       width = s.geometry.width,
-      bg = "#00000000",
+      bg = "#000000aa",
       type = "dock",
    })
 
@@ -46,14 +49,20 @@ top_panel.create = function(s)
    panel:setup {
       expand = "none",
       layout = wibox.layout.align.horizontal,
+      {
+         layout = wibox.layout.align.horizontal,
+         tag_list.create(s),
+         task_list.create(s)
+      },
       nil,
-      require("widgets.calendar").create(s),
       {
          layout = wibox.layout.fixed.horizontal,
          wibox.layout.margin(wibox.widget.systray(), dpi(5), dpi(5), dpi(5), dpi(5)),
          require("widgets.bluetooth"),
          require("widgets.network")(),
-         require("widgets.battery")
+         require("widgets.battery"),
+         require("widgets.calendar").create(s),
+         wibox.layout.margin(require("widgets.layout-box"), dpi(5), dpi(5), dpi(5), dpi(5))
       }
    }
 
