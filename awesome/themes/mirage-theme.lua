@@ -44,13 +44,13 @@ theme.fg_minimize = "#ffffff"
 
 -- Gaps
 theme.useless_gap = dpi(0)
-theme.gap_single_client = true
+theme.gap_single_client = false
 
 -- Corner Radius of Rounded Windows
 theme.corner_radius = dpi(20)
 
 -- Window Borders
-theme.border_width = dpi(0)
+theme.border_width = dpi(1)
 theme.border_normal = theme.bg_normal
 theme.border_focus = "#ff8a65"
 theme.border_marked = theme.fg_urgent
@@ -113,6 +113,11 @@ theme.titlebar_bg_focus = theme.bg_focus
 theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_focus = theme.fg_focus
 theme.titlebar_fg_normal = theme.fg_normal
+
+theme.titlebar_floating_button_normal = icon_dir .. 'normal.svg'
+theme.titlebar_sticky_button_normal = icon_dir .. 'normal.svg'
+theme.titlebar_ontop_button_normal = icon_dir .. 'normal.svg'
+
 
 -- Close Button
 theme.titlebar_close_button_normal = icon_dir .. 'normal.svg'
