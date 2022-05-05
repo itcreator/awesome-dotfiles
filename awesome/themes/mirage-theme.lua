@@ -51,7 +51,8 @@ theme.corner_radius = dpi(20)
 
 -- Window Borders
 theme.border_width = dpi(1)
-theme.border_normal = theme.bg_normal
+--theme.border_normal = theme.bg_normal
+theme.border_normal = "#99aacc"
 theme.border_focus = "#ff8a65"
 theme.border_marked = theme.fg_urgent
 

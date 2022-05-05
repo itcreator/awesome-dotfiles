@@ -62,7 +62,7 @@ awful.tooltip(
    }
 )
 
-local last_bluetooth_check = os.time()
+--local last_bluetooth_check = os.time()
 watch("bluetoothctl --monitor list", 5,
    function(_, stdout)
       -- Check if there  bluetooth
