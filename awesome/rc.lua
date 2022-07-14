@@ -6,7 +6,7 @@
 --      ╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
 
 
-local wibox = require("wibox")
+--local wibox = require("wibox")
 
 -- Standard awesome libraries
 local gears = require("gears")
@@ -28,7 +28,7 @@ local theme_config_dir = gears.filesystem.get_configuration_dir() .. "/configura
 
 -- define default apps (global variable so other components can access it)
 apps = {
-   network_manager = "", -- recommended: nm-connection-editor
+   network_manager = "nm-connection-editor", -- recommended: nm-connection-editor
    power_manager = "", -- recommended: xfce4-power-manager
    terminal = "alacritty",
    launcher = "rofi -normal-window -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
@@ -47,8 +47,8 @@ network_interfaces = {
 -- List of apps to run on start-up
 local run_on_start_up = {
    "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
-   "redshift",
-   "unclutter"
+   --"redshift",
+   "gxkb" --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
 }
 
 
@@ -88,11 +88,47 @@ root.buttons(keys.desktopbuttons)
 local create_rules = require("rules").create
 awful.rules.rules = create_rules(keys.clientkeys, keys.clientbuttons)
 
+mylayout = {}
+mylayout.name = "MY"
+mylayout.arrange = function(p)
+   local useless_gap = beautiful.useless_gap
+   local wa = p.workarea
+   local cls = p.clients
+
+   local offset_x = 0;
+   local offset_y = 0;
+
+   local height = wa.height - useless_gap * (#cls - 2) - beautiful.border_width * (#cls - 3)
+
+   for k, c in ipairs(cls)
+   do
+      local g = {}
+
+      if (k ~= 1)
+      then
+         offset_x = wa.width / 5 * 3 + useless_gap
+         offset_y = (k - 2) * height / (#cls - 1) + (k - 2) * useless_gap
+         g.width = wa.width / 5 * 2 - useless_gap
+         g.height = height / (#cls - 1)
+      else
+         g.width = wa.width / 5 * 3
+         g.height = wa.height
+      end
+
+      g.x = wa.x + offset_x
+      g.y = wa.y + offset_y
+
+      c:geometry(g)
+   end
+end
+
 -- Define layouts
 awful.layout.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.floating,
    awful.layout.suit.max,
+   mylayout,
+   --awful.layout.suit.tile.top,
 }
 
 -- remove gaps if layout is set to max

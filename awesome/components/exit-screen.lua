@@ -139,17 +139,18 @@ awesome.connect_signal("show_exit_screen",
                return
             end
 
-            if key == "s" then
-               suspend_command()
-            elseif key == "e" then
-               exit_command()
-            elseif key == "l" then
-               lock_command()
-            elseif key == "p" then
-               poweroff_command()
-            elseif key == "r" then
-               reboot_command()
-            elseif key == "Escape" or key == "q" or key == "x" then
+            --if key == "s" then
+            --   suspend_command()
+            --elseif key == "e" then
+            --   exit_command()
+            --elseif key == "l" then
+            --   lock_command()
+            --elseif key == "p" then
+            --   poweroff_command()
+            --elseif key == "r" then
+            --   reboot_command()
+            --elseif key == "Escape" or key == "q" or key == "x" then
+            if key == "Escape" or key == "q" or key == "x" then
                exit_screen.hide()
             end
          end
