@@ -32,7 +32,8 @@ apps = {
    power_manager = "", -- recommended: xfce4-power-manager
    terminal = "alacritty",
    launcher = "rofi -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
-   lock = "dm-tool lock",
+   --lock = "dm-tool lock",
+   lock = "i3lock -c 000000 --show-failed-attempts --nofork",
    screenshot = "flameshot gui",
    filebrowser = "nautilus"
 }
@@ -48,7 +49,10 @@ network_interfaces = {
 local run_on_start_up = {
    "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
    --"redshift",
-   "gxkb" --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
+   "gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
+   "nm-applet",
+   "blueman-applet",
+   "xss-lock --transfer-sleep-lock -- i3lock -c 000000^C-show-failed-attempts --nofork"
 }
 
 
@@ -185,3 +189,4 @@ screen.connect_signal("property::geometry", awesome.restart)
 
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
+awful.util.spawn_with_shell('~/.config/awesome/locker')
