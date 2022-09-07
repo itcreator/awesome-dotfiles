@@ -40,12 +40,6 @@ apps = {
 
 awful.screen.set_auto_dpi_enabled( true )
 
--- define wireless and ethernet interface names for the network widget
--- use `ip link` command to determine these
-network_interfaces = {
-   wlan = 'wlp1s0',
-   lan = 'enp1s0'
-}
 
 -- List of apps to run on start-up
 local run_on_start_up = {
