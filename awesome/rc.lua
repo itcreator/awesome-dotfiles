@@ -38,6 +38,8 @@ apps = {
    filebrowser = "nautilus"
 }
 
+awful.screen.set_auto_dpi_enabled( true )
+
 -- define wireless and ethernet interface names for the network widget
 -- use `ip link` command to determine these
 network_interfaces = {
@@ -52,7 +54,8 @@ local run_on_start_up = {
    "gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
    "nm-applet",
    "blueman-applet",
-   "xss-lock --transfer-sleep-lock -- i3lock -c 000000^C-show-failed-attempts --nofork"
+   "xss-lock --transfer-sleep-lock -- i3lock -c 000000^C-show-failed-attempts --nofork",
+   "telegram"
 }
 
 
