@@ -3,12 +3,6 @@
 </div>
 
 <div align="center">
-    <h3>Pastel Theme</h3>
-</div>
-
-![](/screenshots/pastel.png)
-
-<div align="center">
     <h3>Mirage Theme</h3>
 </div>
 
@@ -80,7 +74,6 @@ These will improve the user experience but aren't required:
 1. Ensure all [dependencies](#dependencies) are met
 2. Clone this repository and place its contents into your `.config` folder
 3. edit the `awesome/rc.lua` file to select your theme, and define your desired default and startup applications, as well as network interfaces
-4. navigate to the `awesome/wallpaper` folder and place your desired wallpaper there, ensuring that it is named either `wallpaper.jpg` if using the pastel theme, or `mirage.png` if using the mirage theme. Remember to delete the `blurredWallpaper` file in order to make the blurring script recognize a new wallpaper has been added and needs to be blurred 
 5. optional: edit the `keys.lua` file to change / add keybinds
 
 <a name="folderStructure"></a>
@@ -89,14 +82,13 @@ In order to avoid a poorly organized `rc.lua` spanning thousands of lines, it ha
 + `rc.lua`: The main script that runs when awesome starts. Defines theme and default applications, and selects them
 + `keys.lua`: Contains keybinds
 + `rules.lua`: Contains window rules
-+ `pastel.lua`: Initializes the pastel theme (spawns all of the pastel theme components)
 + `mirage.lua`: Initializes the mirage theme (spawns all of the mirage theme components)
 + `themes`: Contains files with theme variables (ie colors, sizing, font, etc)
 + `icons`: stores icons used in WM
 + `components`: Folder that contains all of the components of the WM, such as panels, volume and brightness sliders, notification pop-ups, etc
 + `configuration`: Contains theme-based config files for applications (ie rofi, picom, etc)
 + `widgets`: Stores widgets used in the functionality of the components
-+ `wallpaper`: Where wallpaper and its blurred varient is generated / stored
+
 
 ### Other cool applications you should install ###
 + `redshift`: Changes screen warmth based on the time of day
@@ -106,10 +98,6 @@ In order to avoid a poorly organized `rc.lua` spanning thousands of lines, it ha
 <a name="appTheming"></a>
 ## Application Theming ##
 ### Firefox ###
-**Pastel**
-1. Set up [my custom Firefox theme](https://github.com/willpower3309/MinimalistMaterialFox)
-2. Use [this](https://github.com/Jaredk3nt/homepage) homepage
-3. Use `SF Text` font
 
 **Mirage**
 1. Set up the [blurredfox theme](https://github.com/manilarome/blurredfox)

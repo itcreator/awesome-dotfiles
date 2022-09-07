@@ -30,21 +30,15 @@ local rules = {}
 function rules.create(clientkeys, clientbuttons)
    local rofi_rule = {}
 
-   if beautiful.name == "mirage" then
-      rofi_rule = {
-         rule_any = {name = {"rofi"}},
-         properties = {floating = true, titlebars_enabled = false},
-         callback = function(c)
-            if beautiful.name == "mirage" then
-               awful.placement.left(c)
-            end
+   rofi_rule = {
+      rule_any = {name = {"rofi"}},
+      properties = {floating = true, titlebars_enabled = false},
+      callback = function(c)
+         if beautiful.name == "mirage" then
+            awful.placement.left(c)
          end
-      }
-   else rofi_rule = {
-         rule_any = {name = {"rofi"}},
-         properties = {maximized = true, floating = true, titlebars_enabled = false},
-      }
-   end
+      end
+   }
 
    return {
       -- All clients will match this rule.

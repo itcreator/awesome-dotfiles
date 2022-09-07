@@ -17,13 +17,14 @@ local awful = require("awful")
 -- ===================================================================
 
 
-local themes = {
-   "pastel", -- 1
-   "mirage"  -- 2
-}
+--local themes = {
+--   "", -- 1
+--   "mirage"  -- 2
+--}
 
 -- change this number to use the corresponding theme
-local theme = themes[2]
+--local theme = themes[2]
+local theme = "mirage"
 local theme_config_dir = gears.filesystem.get_configuration_dir() .. "/configuration/" .. theme .. "/"
 
 -- define default apps (global variable so other components can access it)
@@ -186,4 +187,5 @@ screen.connect_signal("property::geometry", awesome.restart)
 
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
+
 awful.util.spawn_with_shell('~/.config/awesome/locker')
