@@ -6,7 +6,7 @@
     <h3>Mirage Theme</h3>
 </div>
 
-![](/screenshots/mirage.png)
+![](./screenshots/mirage.png)
 
 ## Contents ##
 1. [Details](#details)
@@ -44,7 +44,6 @@
 
 <a name="dependencies"></a>
 ## Dependencies ##
-I have made my best effort to reduce the number of dependencies by using the awesome API to its fullest extent, and allowing users to specify their preferred applications via the `rc.lua` file (see [installation section](#installation)). That being said, here are the dependencies:
 
 |Dependency|Description|
 |:----------:|:-------------:|
@@ -102,14 +101,6 @@ In order to avoid a poorly organized `rc.lua` spanning thousands of lines, it ha
 **Mirage**
 1. Set up the [blurredfox theme](https://github.com/manilarome/blurredfox)
 2. Replace the `colors/blurred.css` with the one found in this repo under `awesome/configuration/mirage/blurred.css`
-
-### Spotify ###
-1. [Install `Spicetify`](https://github.com/khanhas/spicetify-cli)
-2. chown spotify directory: `sudo chown $USER -R /opt/spotify`
-3. run `spicetify` once to generate config
-4. `spicetify backup apply enable-devtool` to enable devtools
-5. Copy my spicetify folder to `~/.config`
-6. run `spicetify update restart`
 
 ### Neovim ###
 1. Ensure the nvim folder from the repo has been copied into the `~/.config` directory
