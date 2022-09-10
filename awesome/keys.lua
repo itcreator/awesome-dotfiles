@@ -196,24 +196,24 @@ keys.globalkeys = gears.table.join(
       end,
       {description = "toggle mute", group = "hotkeys"}
    ),
-   awful.key({}, "XF86AudioNext",
-      function()
-         awful.spawn("mpc next", false)
-      end,
-      {description = "next music", group = "hotkeys"}
-   ),
-   awful.key({}, "XF86AudioPrev",
-      function()
-         awful.spawn("mpc prev", false)
-      end,
-      {description = "previous music", group = "hotkeys"}
-   ),
-   awful.key({}, "XF86AudioPlay",
-      function()
-         awful.spawn("mpc toggle", false)
-      end,
-      {description = "play/pause music", group = "hotkeys"}
-   ),
+   --awful.key({}, "XF86AudioNext",
+   --   function()
+   --      awful.spawn("mpc next", false)
+   --   end,
+   --   {description = "next music", group = "hotkeys"}
+   --),
+   --awful.key({}, "XF86AudioPrev",
+   --   function()
+   --      awful.spawn("mpc prev", false)
+   --   end,
+   --   {description = "previous music", group = "hotkeys"}
+   --),
+   --awful.key({}, "XF86AudioPlay",
+   --   function()
+   --      awful.spawn("mpc toggle", false)
+   --   end,
+   --   {description = "play/pause music", group = "hotkeys"}
+   --),
 
    -- Screenshot on prtscn using scrot
    awful.key({}, "Print",
@@ -367,39 +367,39 @@ keys.globalkeys = gears.table.join(
          resize_client(client.focus, "down")
       end
    ),
-   awful.key({ modkey, "Control" }, "k",
-      function(c)
-         resize_client(client.focus, "up")
-      end
-   ),
-   awful.key({modkey, "Control"}, "h",
-      function(c)
-         resize_client(client.focus, "left")
-      end
-   ),
-   awful.key({modkey, "Control"}, "l",
-      function(c)
-         resize_client(client.focus, "right")
-      end
-   ),
+   --awful.key({ modkey, "Control" }, "k",
+   --   function(c)
+   --      resize_client(client.focus, "up")
+   --   end
+   --),
+   --awful.key({modkey, "Control"}, "h",
+   --   function(c)
+   --      resize_client(client.focus, "left")
+   --   end
+   --),
+   --awful.key({modkey, "Control"}, "l",
+   --   function(c)
+   --      resize_client(client.focus, "right")
+   --   end
+   --),
 
    -- =========================================
    -- NUMBER OF MASTER / COLUMN CLIENTS
    -- =========================================
 
    -- Number of master clients
-   awful.key({modkey, altkey}, "h",
-      function()
-         awful.tag.incnmaster( 1, nil, true)
-      end,
-      {description = "increase the number of master clients", group = "layout"}
-   ),
-   awful.key({ modkey, altkey }, "l",
-      function()
-         awful.tag.incnmaster(-1, nil, true)
-      end,
-      {description = "decrease the number of master clients", group = "layout"}
-   ),
+   --awful.key({modkey, altkey}, "h",
+   --   function()
+   --      awful.tag.incnmaster( 1, nil, true)
+   --   end,
+   --   {description = "increase the number of master clients", group = "layout"}
+   --),
+   --awful.key({ modkey, altkey }, "l",
+   --   function()
+   --      awful.tag.incnmaster(-1, nil, true)
+   --   end,
+   --   {description = "decrease the number of master clients", group = "layout"}
+   --),
    awful.key({ modkey, altkey }, "Left",
       function()
          awful.tag.incnmaster( 1, nil, true)
@@ -522,26 +522,26 @@ keys.clientkeys = gears.table.join(
          move_client(c, "right")
       end
    ),
-   awful.key({modkey, "Shift"}, "j",
-      function(c)
-         move_client(c, "down")
-      end
-   ),
-   awful.key({modkey, "Shift"}, "k",
-      function(c)
-         move_client(c, "up")
-      end
-   ),
-   awful.key({modkey, "Shift"}, "h",
-      function(c)
-         move_client(c, "left")
-      end
-   ),
-   awful.key({modkey, "Shift"}, "l",
-      function(c)
-         move_client(c, "right")
-      end
-   ),
+   --awful.key({modkey, "Shift"}, "j",
+   --   function(c)
+   --      move_client(c, "down")
+   --   end
+   --),
+   --awful.key({modkey, "Shift"}, "k",
+   --   function(c)
+   --      move_client(c, "up")
+   --   end
+   --),
+   --awful.key({modkey, "Shift"}, "h",
+   --   function(c)
+   --      move_client(c, "left")
+   --   end
+   --),
+   --awful.key({modkey, "Shift"}, "l",
+   --   function(c)
+   --      move_client(c, "right")
+   --   end
+   --),
 
    -- toggle fullscreen
    awful.key({modkey}, "f",

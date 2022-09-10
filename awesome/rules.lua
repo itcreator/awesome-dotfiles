@@ -32,12 +32,11 @@ function rules.create(clientkeys, clientbuttons)
 
    rofi_rule = {
       rule_any = {name = {"rofi"}},
-      properties = {floating = true, titlebars_enabled = false},
-      callback = function(c)
-         if beautiful.name == "mirage" then
-            awful.placement.left(c)
-         end
-      end
+      properties = {
+         floating = true,
+         titlebars_enabled = false,
+         fullscreen = true
+      }
    }
 
    return {
@@ -64,7 +63,8 @@ function rules.create(clientkeys, clientbuttons)
                "copyq",
             },
             class = {
-               "Nm-connection-editor"
+               "Nm-connection-editor",
+               "gnome-calculator"
             },
             name = {
                "Event Tester",
@@ -122,17 +122,6 @@ function rules.create(clientkeys, clientbuttons)
       -- rofi rule determined above
       rofi_rule,
 
-      -- File chooser dialog
-      {
-         rule_any = {role = {"GtkFileChooserDialog"}},
-         properties = {floating = true, width = screen_width * 0.55, height = screen_height * 0.65}
-      },
-
-      -- Pavucontrol & Bluetooth Devices
-      {
-         rule_any = {class = {"Pavucontrol"}, name = {"Bluetooth Devices"}},
-         properties = {floating = true, width = screen_width * 0.55, height = screen_height * 0.45}
-      },
    }
 end
 

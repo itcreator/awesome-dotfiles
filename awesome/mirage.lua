@@ -12,7 +12,9 @@
 
 local awful = require("awful")
 local gears = require("gears")
+local wibox = require("wibox")
 
+local naughty = require("naughty")
 local mirage = {}
 
 
@@ -20,6 +22,51 @@ local mirage = {}
 -- Mirage setup
 -- ===================================================================
 
+--function create_plugin()
+--   local buttons_example = wibox {
+--      visible = true,
+--      bg = '#2E3440',
+--      ontop = true,
+--      height = 100,
+--      width = 200,
+--      shape = function(cr, width, height)
+--         gears.shape.rounded_rect(cr, width, height, 3)
+--      end
+--   }
+--   --
+--   --local button = wibox.widget{
+--   --   {
+--   --      {
+--   --         text = "I'm a button!",
+--   --         widget = wibox.widget.textbox
+--   --      },
+--   --      top = 4, bottom = 4, left = 8, right = 8,
+--   --      widget = wibox.container.margin
+--   --   },
+--   --   bg = '#4C566A', -- basic
+--   --   bg = '#00000000', --tranparent
+--   --   shape_border_width = 1, shape_border_color = '#4C566A', -- outline
+--   --   shape = function(cr, width, height)
+--   --      gears.shape.rounded_rect(cr, width, height, 4)
+--   --   end,
+--   --   widget = wibox.container.background
+--   --}
+--   --
+--   buttons_example:setup {
+--      --button,
+--      valigh = 'center',
+--      layout = wibox.layout.align.vertical
+--   }
+--
+--   return buttons_example
+--end
+--
+--
+--
+--awful.screen.connect_for_each_screen(function(s)
+--   naughty.notify({text = tostring(s.index)})
+--   awful.placement.top(create_plugin(), { margins = {top = 400}, parent = s})
+--end)
 
 mirage.initialize = function()
    -- Set Wallpaper
@@ -28,10 +75,10 @@ mirage.initialize = function()
    -- Import components
    require("components.exit-screen")
    require("components.volume-adjust")
-   require("components.mirage.titlebar")
+   require("components.titlebar")
 
    -- Import panels
-   local top_panel = require("components.mirage.top-panel")
+   local top_panel = require("components.top-panel")
 
    local icon_dir = gears.filesystem.get_configuration_dir() .. "/icons/tags/mirage/"
    -- Set up each screen (add tags & panels)

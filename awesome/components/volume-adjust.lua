@@ -20,7 +20,7 @@ local dpi = beautiful.xresources.apply_dpi
 local offsetx = dpi(56)
 local offsety = dpi(300)
 local screen = awful.screen.focused()
-local icon_dir = gears.filesystem.get_configuration_dir() .. "/icons/volume/" .. beautiful.name .. "/"
+local icon_dir = gears.filesystem.get_configuration_dir() .. "/icons/volume/"
 
 
 -- ===================================================================
@@ -70,7 +70,7 @@ volume_adjust:setup {
 
 -- create a 4 second timer to hide the volume adjust
 -- component whenever the timer is started
-local hide_volume_adjust = gears.timer {
+local hide_volume_adjust_timer = gears.timer {
    timeout = 4,
    autostart = true,
    callback = function()
@@ -100,10 +100,10 @@ awesome.connect_signal("volume_change",
 
       -- make volume_adjust component visible
       if volume_adjust.visible then
-         hide_volume_adjust:again()
+         hide_volume_adjust_timer:again()
       else
          volume_adjust.visible = true
-         hide_volume_adjust:start()
+         hide_volume_adjust_timer:start()
       end
    end
 )

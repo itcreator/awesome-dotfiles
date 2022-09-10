@@ -17,20 +17,11 @@ local beautiful = require("beautiful")
 local clickable_container = require("widgets.clickable-container")
 
 local dpi = beautiful.xresources.apply_dpi
-local ICON_DIR = gears.filesystem.get_configuration_dir() .. "/icons/exit-screen/" .. beautiful.name .. "/"
-
--- define module table
-local exit_screen = {}
-
-
--- ===================================================================
--- Appearance
--- ===================================================================
-
+local ICON_DIR = gears.filesystem.get_configuration_dir() .. "/icons/exit-screen/"
 
 local icon_size = dpi(90)
 
-local build_button = function(icon)
+local build_button = function(icon, title)
    local button = wibox.widget {
       wibox.widget {
          wibox.widget {
@@ -66,7 +57,7 @@ end
 local exit_screen_grabber
 
 local function suspend_command()
-   exit_screen.hide()
+   hide_exit_screen_ui()
    awful.spawn.with_shell(apps.lock .. " & systemctl suspend")
 end
 
@@ -75,7 +66,7 @@ local function exit_command()
 end
 
 local function lock_command()
-   exit_screen.hide()
+   hide_exit_screen_ui()
    awful.spawn.with_shell("sleep 1 && " .. apps.lock)
 end
 
@@ -89,45 +80,94 @@ local function reboot_command()
    awful.keygrabber.stop(exit_screen_grabber)
 end
 
-local poweroff = build_button(ICON_DIR .. "power.png", "Shutdown")
-poweroff:connect_signal(
-   "button::release",
-   function()
-      poweroff_command()
-   end
-)
 
-local reboot = build_button(ICON_DIR .. "restart.png", "Restart")
-reboot:connect_signal(
-   "button::release",
-   function()
-      reboot_command()
-   end
-)
+local exit_screens = {}
 
-local suspend = build_button(ICON_DIR .. "sleep.png", "Sleep")
-suspend:connect_signal(
-   "button::release",
-   function()
-      suspend_command()
-   end
-)
+function create_exit_screen_ui(s)
+   local poweroff = build_button(ICON_DIR .. "power.png", "Shutdown")
+   poweroff:connect_signal("button::release", poweroff_command)
 
-local exit = build_button(ICON_DIR .. "logout.png", "Logout")
-exit:connect_signal(
-   "button::release",
-   function()
-      exit_command()
-   end
-)
+   local reboot = build_button(ICON_DIR .. "restart.png", "Restart")
+   reboot:connect_signal("button::release", reboot_command)
 
-local lock = build_button(ICON_DIR .. "lock.png", "Lock")
-lock:connect_signal(
-   "button::release",
-   function()
-      lock_command()
+   local suspend = build_button(ICON_DIR .. "sleep.png", "Sleep")
+   suspend:connect_signal("button::release", suspend_command)
+
+   local exit = build_button(ICON_DIR .. "logout.png", "Logout")
+   exit:connect_signal("button::release", exit_command)
+
+   local lock = build_button(ICON_DIR .. "lock.png", "Lock")
+   lock:connect_signal("button::release", lock_command)
+
+   local exit_screen = {}
+
+   -- hide exit screen
+   function exit_screen.hide()
+      awful.keygrabber.stop(exit_screen_grabber)
+      exit_screen.widget.visible = false
    end
-)
+
+
+   -- ===================================================================
+   -- Create Widget
+   -- ===================================================================
+
+
+   --local screen_geometry = awful.screen.focused().geometry
+   local screen_geometry = s.geometry
+
+   -- Create the widget
+   exit_screen.widget = wibox({
+      x = screen_geometry.x,
+      y = screen_geometry.y,
+      visible = false,
+      ontop = true,
+      type = "splash",
+      height = screen_geometry.height,
+      width = screen_geometry.width
+   })
+
+   -- Item placement
+   exit_screen.widget:setup {
+      nil,
+      {
+         nil,
+         {
+            poweroff,
+            reboot,
+            suspend,
+            exit,
+            lock,
+            layout = wibox.layout.fixed.horizontal
+         },
+         nil,
+         expand = "none",
+         layout = wibox.layout.align.horizontal
+      },
+      nil,
+      expand = "none",
+      layout = wibox.layout.align.vertical
+   }
+
+   table.insert(exit_screens, exit_screen)
+   --exit_screens[exit_screens.] = exit_screen
+
+   return exit_screen
+end
+-- define module table
+
+function hide_exit_screen_ui()
+   for i, es in ipairs(exit_screens) do
+      es.hide()
+   end
+end
+
+
+
+-- ===================================================================
+-- Appearance
+-- ===================================================================
+
 
 -- subscribe to the show_exit_screen signal
 -- show the exit screen when signal is broadcasted
@@ -151,76 +191,20 @@ awesome.connect_signal("show_exit_screen",
             --   reboot_command()
             --elseif key == "Escape" or key == "q" or key == "x" then
             if key == "Escape" or key == "q" or key == "x" then
-               exit_screen.hide()
+               hide_exit_screen_ui()
             end
          end
       )
-      exit_screen.widget.visible = true
+
+      --exit_screen.widget.visible = true
+      awful.screen.connect_for_each_screen(function(s)
+            local es = create_exit_screen_ui(s)
+            es.widget.visible = true
+            awful.placement.top(es.widget, { parent = s})
+      end)
+
    end
 )
 
--- hide exit screen
-function exit_screen.hide()
-   awful.keygrabber.stop(exit_screen_grabber)
-   exit_screen.widget.visible = false
-end
 
-
--- ===================================================================
--- Create Widget
--- ===================================================================
-
-
-local screen_geometry = awful.screen.focused().geometry
-
--- Create the widget
-exit_screen.widget = wibox({
-   x = screen_geometry.x,
-   y = screen_geometry.y,
-   visible = false,
-   ontop = true,
-   type = "splash",
-   height = screen_geometry.height,
-   width = screen_geometry.width
-})
-
-exit_screen.widget:buttons(
-   gears.table.join(
-      -- Middle click - Hide exit_screen
-      awful.button({}, 2,
-         function()
-            exit_screen.hide()
-         end
-      ),
-      -- Right click - Hide exit_screen
-      awful.button({}, 3,
-         function()
-            exit_screen.hide()
-         end
-      )
-   )
-)
-
--- Item placement
-exit_screen.widget:setup {
-   nil,
-   {
-      nil,
-      {
-         poweroff,
-         reboot,
-         suspend,
-         exit,
-         lock,
-         layout = wibox.layout.fixed.horizontal
-      },
-      nil,
-      expand = "none",
-      layout = wibox.layout.align.horizontal
-   },
-   nil,
-   expand = "none",
-   layout = wibox.layout.align.vertical
-}
-
-return exit_screen
+--return exit_screen
