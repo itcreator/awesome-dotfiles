@@ -60,7 +60,6 @@ These will improve the user experience but aren't required:
 + `acpi`: Battery managing cli application, used by top bar widget to determine battery status
 + `bluez`, `bluez-utils`: Bluetooth cli application, used by top bar widget to determine if bluetooth is on
 + `blueman`: Bluetooth managing application, spawns when the bluetooth top panel icon is clicked
-+ `scrot`: Screenshot tool, which is mapped to the Print Screen key in keys.lua. **If you want to meet this dependency, ensure that the `~/Pictures` folder exists**, otherwise the program will save your screenshots to your home directory
 + `alsa-utils`: Provides kernel driven sound drivers, which the control of has been mapped to volume keys in keys.lua
 + `xbacklight`: Controls display brightness, which the control of has been mapped to brightness keys in keys.lua
 
