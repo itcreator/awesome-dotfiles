@@ -332,7 +332,7 @@ keys.globalkeys = gears.table.join(
    -- =========================================
 
    -- Focus screen by index (cycle through screens)
-   awful.key({modkey}, "s",
+   awful.key({modkey}, "o",
       function()
          awful.screen.focus_relative(1)
       end
@@ -582,7 +582,7 @@ keys.clientkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
             {description = "move to master", group = "client"}
     ),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey, "Shift" }, "o",      function (c) c:move_to_screen()               end,
             {description = "move to screen", group = "client"}
     ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
