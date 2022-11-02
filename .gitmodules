@@ -1,0 +1,6 @@
+[submodule "awesome/widgets/awesome-switcher"]
+	path = awesome/widgets/awesome-switcher
+	url = https://github.com/berlam/awesome-switcher.git
+[submodule "awesome/widgets/cyclefocus"]
+	path = awesome/widgets/cyclefocus
+	url = https://github.com/blueyed/awesome-cyclefocus

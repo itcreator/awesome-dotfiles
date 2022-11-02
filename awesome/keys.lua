@@ -129,6 +129,72 @@ keys.clientbuttons = gears.table.join(
 -- Desktop Key bindings
 -- ===================================================================
 
+local cyclefocus = require('widgets.cyclefocus')
+cyclefocus.icon_col_width = dpi(64)
+cyclefocus.show_clients = true
+cyclefocus.display_next_count = 5
+cyclefocus.display_prev_count = 5
+local escape_markup = function(s)
+    local escape_pattern = "[<>&]"
+    local escape_subs = { ['<'] = "&lt;", ['>'] = "&gt;", ['&'] = "&amp;" }
+    return s:gsub(escape_pattern, escape_subs)
+end
+cyclefocus.preset_for_offset = {
+    -- Default callback, which will gets applied for all offsets (first).
+    default = function (preset, args)
+        -- Default font and icon size (gets overwritten for current/0 index).
+        preset.font = 'sans 11'
+        preset.icon_size = dpi(28)
+        preset.text = escape_markup(cyclefocus.get_client_title(args.client, false))
+    end,
+
+    -- Preset for current entry.
+    ["0"] = function (preset, args)
+        preset.font = 'sans 14'
+        preset.icon_size = dpi(64)
+        preset.text = escape_markup(cyclefocus.get_client_title(args.client, true))
+        -- Add screen number if there is more than one.
+        if screen.count() > 1 then
+            preset.text = preset.text .. " [screen " .. tostring(args.client.screen.index) .. "]"
+        end
+        preset.text = preset.text .. " [#" .. args.idx .. "] "
+        preset.text = '<b>' .. preset.text .. '</b>'
+    end,
+    -- Preset for next entry.
+    ["1"] = function (preset, args)
+        preset.font = 'sans 13'
+        preset.icon_size = dpi(48)
+        preset.text = escape_markup(cyclefocus.get_client_title(args.client, true))
+        -- Add screen number if there is more than one.
+        if screen.count() > 1 then
+            preset.text = preset.text .. " [screen " .. tostring(args.client.screen.index) .. "]"
+        end
+        preset.text = preset.text .. " [#" .. args.idx .. "] "
+        preset.text = '<b>' .. preset.text .. '</b>'
+    end,
+
+    -- Preset for previous entry.
+    ["-1"] = function (preset, args)
+        preset.font = 'sans 13'
+        preset.icon_size = dpi(48)
+        preset.text = escape_markup(cyclefocus.get_client_title(args.client, true))
+        -- Add screen number if there is more than one.
+        if screen.count() > 1 then
+            preset.text = preset.text .. " [screen " .. tostring(args.client.screen.index) .. "]"
+        end
+        preset.text = preset.text .. " [#" .. args.idx .. "] "
+        preset.text = '<b>' .. preset.text .. '</b>'
+    end,
+
+    -- You can refer to entries by their offset.
+    -- ["-1"] = function (preset, args)
+    --     -- preset.icon_size = 32
+    -- end,
+    -- ["1"] = function (preset, args)
+    --     -- preset.icon_size = 32
+    -- end
+}
+
 
 keys.globalkeys = gears.table.join(
    -- =========================================
@@ -313,19 +379,45 @@ keys.globalkeys = gears.table.join(
       {description = "focus right", group = "client"}
    ),
 
+    cyclefocus.key({ modkey, }, "Tab", {
+        -- cycle_filters as a function callback:
+        -- cycle_filters = { function (c, source_c) return c.screen == source_c.screen end },
+
+        -- cycle_filters from the default filters:
+        cycle_filters = { cyclefocus.filters.same_screen, cyclefocus.filters.common_tag },
+        keys = { 'Tab', 'ISO_Left_Tab' }  -- default, could be left out
+    }),
+    cyclefocus.key({ modkey, "Shift" }, "Tab", {
+        -- cycle_filters as a function callback:
+        -- cycle_filters = { function (c, source_c) return c.screen == source_c.screen end },
+
+        -- cycle_filters from the default filters:
+        cycle_filters = { cyclefocus.filters.same_screen, cyclefocus.filters.common_tag },
+        keys = { 'Tab', 'ISO_Left_Tab' }  -- default, could be left out
+    }),
+
+    ---- modkey+Tab: cycle through all clients.
+    --awful.key({ modkey }, "Tab", function(c)
+    --    cyclefocus.cycle({modifier="Super_L"})
+    --end),
+    ---- modkey+Shift+Tab: backwards
+    --awful.key({ modkey, "Shift" }, "Tab", function(c)
+    --    cyclefocus.cycle({modifier="Super_L"})
+    --end),
+
    -- Focus client by index (cycle through clients)
-   awful.key({modkey}, "Tab",
-      function()
-         awful.client.focus.byidx(1)
-      end,
-      {description = "focus next by index", group = "client"}
-   ),
-   awful.key({modkey, "Shift"}, "Tab",
-      function()
-         awful.client.focus.byidx(-1)
-      end,
-      {description = "focus previous by index", group = "client"}
-   ),
+   --awful.key({modkey}, "Tab",
+   --   function()
+   --       awful.client.focus.byidx(1)
+   --   end,
+   --   {description = "focus next by index", group = "client"}
+   --),
+   --awful.key({modkey, "Shift"}, "Tab",
+   --   function()
+   --       awful.client.focus.byidx(-1)
+   --   end,
+   --   {description = "focus previous by index", group = "client"}
+   --),
 
    -- =========================================
    -- SCREEN FOCUSING
