@@ -16,14 +16,6 @@ local awful = require("awful")
 -- User Configuration
 -- ===================================================================
 
-
---local themes = {
---   "", -- 1
---   "mirage"  -- 2
---}
-
--- change this number to use the corresponding theme
---local theme = themes[2]
 local theme = "mirage"
 local theme_config_dir = gears.filesystem.get_configuration_dir() .. "/configuration/" .. theme .. "/"
 
@@ -34,7 +26,7 @@ apps = {
    terminal = "alacritty",
    launcher = "rofi -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
    --lock = "dm-tool lock",
-   lock = "i3lock -c 000000 --show-failed-attempts --nofork",
+   lock = "bash -c 'i3lock -c 000000 --show-failed-attempts --nofork & sleep 5 && xset dpms force off'",
    screenshot = "flameshot gui",
    filebrowser = "nautilus"
 }
@@ -49,7 +41,7 @@ local run_on_start_up = {
    "gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
    "nm-applet",
    "blueman-applet",
-   "xss-lock --transfer-sleep-lock -- i3lock -c 000000 --show-failed-attempts --nofork",
+   "xautolock -time 15 -locker 'i3lock -c 000000 --show-failed-attempts --nofork & sleep 5 && xset dpms force off'",
    "telegram"
 }
 

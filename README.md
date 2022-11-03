@@ -62,6 +62,7 @@ These will improve the user experience but aren't required:
 + `blueman`: Bluetooth managing application, spawns when the bluetooth top panel icon is clicked
 + `alsa-utils`: Provides kernel driven sound drivers, which the control of has been mapped to volume keys in keys.lua
 + `xbacklight`: Controls display brightness, which the control of has been mapped to brightness keys in keys.lua
++ `xset`` - turns off display
 
 ### Fonts You Should Install ###
 + `SF Text`: System font used by macOS, iOS, and watchOS. Used in this config as the WM font. Also used as font for firefox
