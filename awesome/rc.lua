@@ -36,12 +36,11 @@ awful.screen.set_auto_dpi_enabled( true )
 
 -- List of apps to run on start-up
 local run_on_start_up = {
-   "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
+   "picom --config " .. theme_config_dir .. "picom.conf",
    --"redshift",
-   "gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
+   --"gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
    "nm-applet",
    "blueman-applet",
-   "xautolock -time 15 -locker 'i3lock -c 000000 --show-failed-attempts --nofork & sleep 5 && xset dpms force off'",
    "telegram"
 }
 
@@ -180,4 +179,4 @@ screen.connect_signal("property::geometry", awesome.restart)
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
 
-awful.util.spawn_with_shell('~/.config/awesome/locker')
+awful.util.spawn_with_shell('~/.config/awesome/locker.sh')

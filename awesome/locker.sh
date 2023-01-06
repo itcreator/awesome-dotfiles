@@ -2,9 +2,5 @@
 
 exec xautolock \
   -detectsleep \
-  -time 1 \
-  -locker "i3lock -d -c 000070" \
-  -notify 30 \
-  -notifier "notify-send -u critical -t 10000
-
--- 'LOCKING screen in 30 seconds'"
+  -time 5 \
+  -locker "i3lock -c 000000 --show-failed-attempts --nofork & sleep 5 && xset dpms force off"
