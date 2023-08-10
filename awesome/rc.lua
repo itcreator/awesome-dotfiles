@@ -38,7 +38,7 @@ awful.screen.set_auto_dpi_enabled( true )
 local run_on_start_up = {
    "picom --config " .. theme_config_dir .. "picom.conf",
    --"redshift",
-   --"gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
+   "gxkb", --X11 Keyboard switcher https://zen-tools.github.io/gxkb/
    "nm-applet",
    "blueman-applet",
    "telegram"
